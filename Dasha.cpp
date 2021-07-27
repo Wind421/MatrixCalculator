@@ -1,7 +1,7 @@
 #include "prototype.h"
 using namespace std;
 
-void calculator::summa(matrix& a, matrix& b, matrix& c) 
+void calculator::summa(matrix& a, matrix& b, matrix& c)
 {
 	c.columns = a.columns; //The finall matrix has the same size
 	c.lines = a.lines;
@@ -23,7 +23,7 @@ void calculator::summa(matrix& a, matrix& b, matrix& c)
 		}
 	}
 }
-void calculator::subtraction(matrix& a, matrix& b, matrix& c) 
+void calculator::subtraction(matrix& a, matrix& b, matrix& c)
 {
 	c.columns = a.columns; //The finall matrix has the same size
 	c.lines = a.lines;
@@ -42,6 +42,27 @@ void calculator::subtraction(matrix& a, matrix& b, matrix& c)
 		for (int j = 0; j < c.columns; j++)
 		{
 			c.table[i][j] = a.table[i][j] - b.table[i][j];
+		}
+	}
+}
+void calculator::multiply_on_number(matrix& a, matrix& c, double k)
+{
+	c.columns = a.columns;
+	c.lines = a.lines;
+	c.table.resize(a.lines);
+
+	for (int i = 0; i < c.lines; i++)
+	{
+		for (int j = 0; j < c.columns; j++)
+		{
+			c.table[i].push_back(0);
+		}
+	}
+	for (int i = 0; i < c.lines; i++)
+	{
+		for (int j = 0; j < c.columns; j++)
+		{
+			c.table[i][j] = a.table[i][j] * k;
 		}
 	}
 }
@@ -72,16 +93,15 @@ void calculator::sum()
 		show(c); //show the finall one
 
 		cout << endl << "--------------------------------------------";
-		cout << endl << "Do you want to add one more matrix? Yes/No: ";
+		cout << endl << "Do you want to add one more matrix? 1-Yes/2-No: ";
 
-		char str[4];
-		while ((strcmp(str, "No") != 0) or (strcmp(str, "Yes") != 0)) {//Wait for answer to continue or not
-			cin >> str;
-			if (strcmp(str, "No") == 0) break;
-			else if (strcmp(str, "Yes") == 0) break;
+		char answer;
+		while (true) {//Wait for answer to continue or not
+			cin >> answer;
+			if ((answer == '1') || (answer == '2')) break;
 			else cout << "Try again: ";
 		}
-		if (strcmp(str, "No") == 0) break;
+		if (answer != '1') break;
 		else
 		{
 			for (int i = 0; i < c.lines; i++) //1 matrix = finall matrix
@@ -107,7 +127,7 @@ void calculator::sub()
 	filling(a, 1); //Enter the first one
 	cout << "Your matrix: " << endl;
 
-	while (true) 
+	while (true)
 	{
 		show(a);//show the 1 one
 
@@ -124,16 +144,15 @@ void calculator::sub()
 		show(c); //show the finall one
 
 		cout << endl << "--------------------------------------------";
-		cout << endl << "Do you want to subtract one more matrix? Yes/No: ";
+		cout << endl << "Do you want to add one more matrix? 1-Yes/2-No: ";
 
-		char str[4];
-		while ((strcmp(str, "No") != 0) or (strcmp(str, "Yes") != 0)) {//Wait for answer to continue or not
-			cin >> str;
-			if (strcmp(str, "No") == 0)	break;
-			else if (strcmp(str, "Yes") == 0) break;
+		char answer;
+		while (true) {//Wait for answer to continue or not
+			cin >> answer;
+			if ((answer == '1') || (answer == '2')) break;
 			else cout << "Try again: ";
 		}
-		if (strcmp(str, "No") == 0)	break;
+		if (answer != '1') break;
 		else {
 			for (int i = 0; i < c.lines; i++) //1 matrix = finall matrix
 			{
@@ -148,27 +167,7 @@ void calculator::sub()
 		}
 	}
 }
-void calculator::multiply_on_number(matrix& a, matrix& c, double k)
-{
-	c.columns = a.columns;
-	c.lines = a.lines;
-	c.table.resize(a.lines);
 
-	for (int i = 0; i < c.lines; i++)
-	{
-		for (int j = 0; j < c.columns; j++)
-		{
-			c.table[i].push_back(0);
-		}
-	}
-	for (int i = 0; i < c.lines; i++)
-	{
-		for (int j = 0; j < c.columns; j++)
-		{
-			c.table[i][j] = a.table[i][j] * k;
-		}
-	}
-}
 void calculator::multi_number()
 {
 	matrix a;
@@ -189,18 +188,16 @@ void calculator::multi_number()
 		show(c);
 
 		cout << endl << "--------------------------------------------";
-		cout << endl << "Do you want to miltiply one more matrix? Yes/No: ";
+		cout << endl << "Do you want to add one more matrix? 1-Yes/2-No: ";
 
-		char str[4];
-		while ((strcmp(str, "No") != 0) or (strcmp(str, "Yes") != 0)) //Wait for answer to continue or not
-		{
-			cin >> str;
-			if (strcmp(str, "No") == 0)  break;
-			else if (strcmp(str, "Yes") == 0) break;
+		char answer;
+		while (true) {//Wait for answer to continue or not
+			cin >> answer;
+			if ((answer == '1') || (answer == '2')) break;
 			else cout << "Try again: ";
 		}
-		if (strcmp(str, "No") == 0) break;
-		else 
+		if (answer != '1') break;
+		else
 		{
 			for (int i = 0; i < c.lines; i++) //1 matrix = finall matrix
 			{
@@ -214,11 +211,11 @@ void calculator::multi_number()
 		}
 	}
 }
-int  calculator::keys() 
+int  calculator::keys()
 {
 	int key = 0;
 	int code;
-	do 
+	do
 	{
 		system("cls");
 		key = (key + 8) % 8;
@@ -257,20 +254,20 @@ int  calculator::keys()
 	system("cls");
 	return key;
 }
-void calculator::menu() 
+void calculator::menu()
 {
 	int answer = keys();
-	while (answer != 7) 
+	while (answer != 7)
 	{
 		switch (answer)
 		{
-		case 0: 
+		case 0:
 		{
 			cout << "    Summa    " << endl;
 			sum();
 			break;
 		}
-		case 1: 
+		case 1:
 		{
 			cout << "    Subtration    " << endl;
 			sub();
@@ -281,7 +278,7 @@ void calculator::menu()
 			multi_number();
 			break;
 		}
-		case 3: 
+		case 3:
 		{
 			cout << "    Multipling matrixs    " << endl;
 			multiply();
@@ -290,13 +287,15 @@ void calculator::menu()
 		case 4:
 		{
 			cout << "    Determinant of a matrix    " << endl;
-			cout << Det();
+			cout << "Determinant of a matrix:" << Det() << endl;
+			system("pause");
 			break;
 		}
-		case 5: 
+		case 5:
 		{
 			cout << "    Inverse Matrix    " << endl;
 			Inverse();
+			system("pause");
 			break;
 		}
 		case 6:
@@ -305,12 +304,12 @@ void calculator::menu()
 			matrix_Rank();
 			break;
 		}
-		case 7: 
+		case 7:
 		{
 			cout << "    You left the program    " << endl;
 			break;
 		}
 		}
-		int answer = keys();
+		answer = keys();
 	}
 }

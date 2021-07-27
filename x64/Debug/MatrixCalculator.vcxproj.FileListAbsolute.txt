@@ -1,0 +1,2 @@
+C:\Users\Admin\Desktop\C++\MatrixCalculator\x64\Debug\MatrixCalculator.exe
+C:\Users\Admin\Desktop\C++\MatrixCalculator\x64\Debug\MatrixCalculator.pdb
